@@ -12,9 +12,6 @@ const App = {
         {title: 'Роутер', text: 'В данном блоке вы узнаете все о том, как работает мультиязычность во Vue. Мы создадим миниклон Gmail в данном блоке, где вы на практике увидите как работать с динамическим роутером.'},
         {title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.'},
         {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'},
-
-        // лишняя строчка
-        {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'},
       ]
     }
   },
@@ -27,13 +24,14 @@ const App = {
     },
     reset() {
       // начать заново
+      this.activeIndex = 0
     },
     nextOfFinish() {
       // кнопка вперед или закончить
-      // this.$refs.back.removeAttribute('disabled')
-      if (this.activeIndex < 5) {
+      if (this.activeIndex < this.steps.length) {
         this.activeIndex++
       }
+      console.log(this.activeIndex);
     },
     setActive(idx) {
       // когда нажимаем на определенный шаг
@@ -43,22 +41,16 @@ const App = {
   computed: {
     // тут стоит определить несколько свойств:
     // 1. текущий выбранный шаг
-
+    
     // 2. выключена ли кнопка назад
     disableBtn() {
-      if (this.activeIndex === 0) {
-        return true
-      }
+      return this.activeIndex === 0
     },
     // 3. находимся ли мы на последнем шаге
     checkFinishBtn() {
-      if (this.activeIndex === 4) {
-        return 'Закончить'
-      } else {
-        return 'Вперед'
-      }
+      return this.activeIndex === this.steps.length - 1
     }
   }
+  
 }
-
 Vue.createApp(App).mount('#app')
