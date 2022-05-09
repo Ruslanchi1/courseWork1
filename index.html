@@ -25,11 +25,12 @@
               'active': activeIndex === idx,
               'done': activeIndex > idx
             }]"
+            :key="item"
           >
             <span>{{ idx + 1 }}</span> Шаг {{ idx + 1 }}
           </li>
         </ul>
-        <div v-if="activeIndex < steps.length - 1">
+        <div v-if="!isFinished">
           <button
             class="btn" 
             :disabled="disableBtn" 
